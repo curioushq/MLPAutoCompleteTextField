@@ -41,6 +41,7 @@
 @property (assign) BOOL showAutoCompleteTableWhenEditingBegins; //only applies for drop down style autocomplete tables.
 @property (assign) BOOL disableAutoCompleteTableUserInteractionWhileFetching;
 @property (assign) BOOL autoCompleteTableAppearsAsKeyboardAccessory; //if set to TRUE, the autocomplete table will appear as a keyboard input accessory view rather than a drop down.
+@property (assign) BOOL onlyExpandOnFirstResponder;
 
 
 @property (assign) BOOL autoCompleteTableViewHidden;
@@ -60,7 +61,7 @@
 @property (nonatomic, strong) UIColor *autoCompleteTableBackgroundColor;
 @property (strong) UIColor *autoCompleteTableCellBackgroundColor;
 @property (strong) UIColor *autoCompleteTableCellTextColor;
-
+@property (strong) UIView *textFieldCoverView;
 
 - (void)registerAutoCompleteCellNib:(UINib *)nib forCellReuseIdentifier:(NSString *)reuseIdentifier;
 

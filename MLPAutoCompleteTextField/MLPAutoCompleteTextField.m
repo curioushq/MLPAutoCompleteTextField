@@ -119,6 +119,7 @@ static NSString *kDefaultAutoCompleteCellIdentifier = @"_DefaultAutoCompleteCell
     [self setAutoCompleteTableView:newTableView];
     
     [self styleAutoCompleteTableForBorderStyle:self.borderStyle];
+    self.onlyExpandOnFirstResponder = YES;
 }
 
 
@@ -399,7 +400,7 @@ withAutoCompleteString:(NSString *)string
     NSAssert(numberOfRows >= 0,
              @"Number of rows given for auto complete table was negative, this is impossible.");
     
-    if(!self.isFirstResponder){
+    if(!self.isFirstResponder && self.onlyExpandOnFirstResponder){
         return;
     }
     
@@ -436,7 +437,14 @@ withAutoCompleteString:(NSString *)string
             }
         }
         
-        [self.superview bringSubviewToFront:self];
+        if (self.textFieldCoverView)
+        {
+            [self.superview insertSubview:self belowSubview:self.textFieldCoverView];
+        }
+        else
+        {
+            [self.superview bringSubviewToFront:self];
+        }
         [self.superview insertSubview:self.autoCompleteTableView
                          belowSubview:self];
         [self.autoCompleteTableView setUserInteractionEnabled:YES];
